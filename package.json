@@ -1,0 +1,11 @@
+{
+    "name": "node_js_page",
+    "version": "0.0.1",
+    "description": "Node js page",
+    "repository": "false",
+    "license": "nicholas",
+    "private": true,
+    "dependencies": {
+        "mime": "~1.2.7"
+    }
+}
