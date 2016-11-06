@@ -6,6 +6,8 @@
     "license": "nicholas",
     "private": true,
     "dependencies": {
-        "mime": "~1.2.7"
+        "mime": "~1.2.7",
+        "express": "3.x",
+        "socket.io": "*"
     }
 }

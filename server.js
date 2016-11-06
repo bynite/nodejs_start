@@ -3,14 +3,6 @@ var http = require("http"),
     path = require("path"),
     mime = require("mime");
 
-/*
-http.createServer(function(request, response) {
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("It's alive!");
-    response.end();
-}).listen(3000);
-*/
-
 function send404(response) {
     response.writeHead(404, {"Content-type": "text/plain"});
     response.write("Error 404: resource not found");
@@ -51,4 +43,16 @@ var server = http.createServer(function(request, response) {
     serverWorking(response, absPath);
 });
 
-var port_number = server.listen(process.env.PORT || 3000);
+var port_number = server.listen(process.env.PORT || 3000, function() {
+    console.log("Server up and running on http://localhost:3000/");
+});
+
+var io = require("socket.io").listen(server);
+
+io.sockets.on("connection", function(socket) {
+    socket.emit("chat", { name: "Server", text: "Connected"});
+
+    socket.on("chat", function(data) {
+        io.sockets.emit("chat", { name: data.name, text: data.text });
+    });
+});
